@@ -10,6 +10,7 @@ api.on('ready', () => {
 });
 
 api.on('message', evt => {
+    // auto reply
     // console.log(evt.author.id);
     if(evt.author.id !== secret.masterid) return;
     if (evt.author.bot) return;
@@ -80,6 +81,8 @@ api.on('message', evt => {
 var working = false;
 
 const work = async (evt) => {
+    // Channel Access Check
+        
     console.log(`[INFO] Started work at ${evt.channel.id}`);
     var boo = true;
 
@@ -95,7 +98,9 @@ const work = async (evt) => {
             boo = true;
         }
         console.log('[INFO] Power sleep...');
-        await sleep(63000);
+        // Randomize Time
+        var randInt = Math.round(Math.random() * (499 - (-499)) + (-499));
+        await sleep(62000+randInt);
         console.log('[INFO] Waking up...');
     }
     console.log(`[INFO] Stopped work at ${evt.channel.id}`);
