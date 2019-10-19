@@ -62,7 +62,7 @@ api.on('message', evt => {
                         .then(msg => msg.delete(3000))
                         .catch(console.error);
                     } else {
-                        evt.channel.sendMessage(cmd.substring(5)).catch(console.error);
+                        evt.channel.send(cmd.substring(5)).catch(console.error);
                     }
                 }
             case 'status':
