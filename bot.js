@@ -6,15 +6,19 @@ const token = secret.token;
 
 api.on('ready', () => {
     console.log(`Connected as ${api.user.tag}`);
-    api.user.setActivity('after Vidhan Bhatt', {type: 'WATCHING'} );
+    api.user.setActivity('after the Spineal Gland', {type: 'WATCHING'} );
 });
 
 api.on('message', evt => {
+    // TODO: auto reply
     // console.log(evt.author.id);
-    if(evt.author.id !== secret.masterid) return;
     if (evt.author.bot) return;
 
     if (evt.content.substring(0, 2) == '()') {
+        if(evt.author.id !== secret.masterid) {
+            console.log(`[WARN] ${evt.author.tag} is declined from running "${evt.content}"`);
+            return;
+        }
         const cmd = evt.content.substring(2).toLowerCase();
 
         // Log Commands
@@ -22,24 +26,25 @@ api.on('message', evt => {
 
         const args = cmd.split(' ');
 
-        // null args
-        for(var i=0;i<args.length;i++) {
-            if(args[i]==null) console.log()//remove element
-        }
+        // TODO: null args
+        // for(var i=0;i<args.length;i++) {
+        //     if(args[i]==null) console.log()//remove element
+        // }
 
         switch(args[0]) {
             case 'ping':
                 evt.reply('pong!')
                 break;
+            case 'gm':
+                evt.channel.send('!withdraw all')
+                .then(msg => msg.delete(3000))
+                .catch(console.error);
+                evt.channel.send(`!give-money ${evt.author.tag} all`)
+                .then(msg => msg.delete(3000))
+                .catch(console.error);
+                console.log(`[INFO] Gave all money to ${evt.author.tag}`);
+                break;
             case 'work':
-                // CATCH
-                // ValidatorJS
-                // if(args.length !== 3) {
-                //     evt.channel.sendMessage('args???').catch(console.error);
-                //     break;
-                // }
-                // let txt = args[1];
-                // let iter = args[2];
                 if(working) {
                     working = false;
                     console.log('[INFO] Stopping work...');
@@ -80,6 +85,7 @@ api.on('message', evt => {
 var working = false;
 
 const work = async (evt) => {
+    // TODO: Channel Access Check
     console.log(`[INFO] Started work at ${evt.channel.id}`);
     var boo = true;
 
@@ -95,7 +101,9 @@ const work = async (evt) => {
             boo = true;
         }
         console.log('[INFO] Power sleep...');
-        await sleep(63000);
+        // Randomize Time
+        var randInt = Math.round(Math.random() * (499 - (-499)) + (-499));
+        await sleep(62000+randInt);
         console.log('[INFO] Waking up...');
     }
     console.log(`[INFO] Stopped work at ${evt.channel.id}`);
