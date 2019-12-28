@@ -6,7 +6,7 @@ const token = secret.token;
 
 api.on('ready', () => {
     console.log(`Connected as ${api.user.tag}`);
-    api.user.setActivity('after the Spineal Gland', {type: 'WATCHING'} );
+    api.user.setActivity('', {type: 'WATCHING'} );
 });
 
 api.on('message', evt => {
