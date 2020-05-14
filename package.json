@@ -1,5 +1,5 @@
 {
-  "name": "slashslash",
+  "name": "spineclub",
   "version": "1.0.0",
   "description": "slashslash discord bot",
   "main": "bot.js",
@@ -11,7 +11,8 @@
   "keywords": [
     "bot",
     "discord",
-    "slashslash"
+    "spine",
+    "club"
   ],
   "author": "nathan13888",
   "license": "AGPL-3.0",
